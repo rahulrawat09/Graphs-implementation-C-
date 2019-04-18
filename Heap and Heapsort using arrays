@@ -1,0 +1,102 @@
+#include <iostream>
+
+using namespace std;
+
+void buildheap(int*,int);
+int parent(int i)
+{
+    return i/2;
+}
+
+int leftchild(int i)
+{
+    return 2*i;
+}
+
+int rightchild(int i,int n)
+{
+    if(2*i+1>n)
+        return i;
+    else
+        return 2*i+1;
+}
+
+void swiftdown(int* H,int i,int n)
+{
+   if(i>n/2)
+    return;
+
+    else if(H[leftchild(i)]>=H[rightchild(i,n)])
+    {
+       if(H[i]<H[leftchild(i)])
+     {
+        int temp=H[i];
+        H[i]=H[leftchild(i)];
+        H[leftchild(i)]=temp;
+        swiftdown(H,leftchild(i),n);
+     }
+    }
+
+    else
+    {
+        if(H[i]<H[rightchild(i,n)])
+     {
+        int temp=H[i];
+        H[i]=H[rightchild(i,n)];
+        H[rightchild(i,n)]=temp;
+        swiftdown(H,rightchild(i,n),n);
+     }
+    }
+
+}
+
+
+void heapsort(int* H,int n)
+{
+ buildheap(H,n);
+
+     for(int i=1;i<=n;i++)
+    {
+        cout<<H[i]<<"  ";
+    }
+    cout<<endl;
+ int siz=n;
+ for(int i=1;i<n;i++)
+ {
+     int temp=H[1];
+     H[1]=H[siz];
+     H[siz]=temp;
+     siz--;
+     swiftdown(H,1,siz);
+ }
+
+}
+
+int main()
+{
+    int n;
+    cin>>n;
+    int H[n];
+    for(int i=1;i<=n;i++)
+    {
+        cin>>H[i];
+    }
+
+
+    heapsort(H,n);
+
+    for(int i=1;i<=n;i++)
+    {
+        cout<<H[i]<<"  ";
+    }
+    return 0;
+}
+
+void buildheap(int* H,int n)
+{
+   for(int i=n/2;i>=1;i--)
+   {
+     swiftdown(H,i,n);
+   }
+
+}
