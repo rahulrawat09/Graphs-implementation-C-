@@ -1,0 +1,51 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    cout<<"Enter Number of nodes and number of edges respectively:"<<endl;
+    int n,e;
+    cin>>n>>e;
+
+    cout<<"\nEnter the connections of nodes:"<<endl;
+    vector<int> g[n+1];
+    bool visited[n+1]={0};
+    for(int i=0;i<e;i++)
+    {
+     int a,b;
+     cin>>a>>b;
+     g[a].push_back(b);
+     g[b].push_back(a);
+    }
+
+    int root=1;
+    int level=1;
+    queue<int> q;
+    q.push(root);
+    visited[1]=1;
+    while(!q.empty())
+    {
+     int siz=q.size();
+     cout<<"LEVEL "<<level<<": ";
+    while(siz--)
+    {
+     int x=q.front();
+     visited[x]?:cout<<x<<" ";
+     q.pop();
+
+     for(int i=0;i<g[x].size();i++)
+     {
+         if(visited[g[x][i]]==0)
+         {
+          cout<<g[x][i]<<" ";
+          q.push(g[x][i]);
+          visited[g[x][i]]=1;
+         }
+     }
+    }
+    cout<<endl;
+    level++;
+    }
+
+    return 0;
+}
