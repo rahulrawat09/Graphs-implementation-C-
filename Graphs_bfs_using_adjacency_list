@@ -17,7 +17,7 @@ int main()
      g[a].push_back(b);
      g[b].push_back(a);
     }
-
+    cout<<"\nBFS for graph (root being 1):"<<endl;
     int root=1;
     int level=1;
     queue<int> q;
