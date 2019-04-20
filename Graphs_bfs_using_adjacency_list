@@ -18,7 +18,7 @@ int main()
      g[b].push_back(a);
     }
     cout<<"\nBFS for graph (root being 1):"<<endl;
-    int root=1;
+    int root=1;              // change this for any other root node
     int level=1;
     queue<int> q;
     q.push(root);
